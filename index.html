@@ -13,18 +13,21 @@
     
     <section class="sectionCadastro d-flex flex-column justify-content-center ">
         <h1 class="text-center my-4  ">Cadastro</h1>
-        <form class="row w-50 border border-light-subtle p-3 rounded mx-auto">
+        <form id="formCadastro" class="row w-50 border border-light-subtle p-3 rounded mx-auto"  >
             <div class="col-12  mb-3">
                 <label for="nome" class="form-label">Nome</label>
-                <input type="text"   class="form-control" id="nome"  >
+                <input type="text"   class="form-control" id="nome" name="nome" value="" aria-describedby="nome" required >
+                <span id="validarNome" class="text-danger d-none">Nome já foi cadastrado !</span> 
             </div>
             <div class="col-12  mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email"   class="form-control" id="email"  >
+            <input type="email"   class="form-control" id="email" value="" required >
+            <span class="text-danger d-none">Nome já foi cadastrado !</span>
             </div>
             
             <div class="col-12  mb-3">
-                <select class="form-select " aria-label="Default select example">
+                <label for="profissao" class="form-label">Profissão</label> 
+                <select class="form-select " aria-label="Default select example" id="profissao" required>
                     <option selected> - Selecione - </option>
                     <option value="analistaBigData">Analista de big data</option>
                     <option value="analistaTestesSoftwares">Analista de testes de softwares</option>
@@ -38,41 +41,77 @@
             </div>
             
             <div class="col-12 d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary mb-3">Salvar</button>
+                <button type="submit" class="btn btn-primary mb-3" >Salvar</button>
             </div>
       </form>
     </section>
     <section class="sectionTable container mt-4">
-        <table class="table">
+        <table class="table table-striped ">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col" hidden >Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Profissão</th>
+                <th scope="col"></th>
               </tr>
             </thead>
-            <tbody class="table-group-divider">
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
+            <tbody class="table-group-divider" id="corpoTabela"> 
+               <tr>
+                    <td colspan="4"><h4 class="text-center text-danger">Não tem dados</h4></td>
+               </tr> 
             </tbody>
           </table>
     </section>
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="formEditar" class="row w-100 border border-light-subtle p-3 rounded mx-auto"  >
+                <div class="col-12  mb-3" hidden>
+                    <label for="idEditar" class="form-label">Id:</label>
+                    <input type="text"   class="form-control" id="idEditar" name="nome" value="" aria-describedby="nome"  > 
+                </div>
+                <div class="col-12  mb-3">
+                    <label for="nomeEditar" class="form-label">Nome</label>
+                    <input type="text"   class="form-control" id="nomeEditar" name="nome" value="" aria-describedby="nome" required >
+                    <span id="validarNome" class="text-danger d-none">Nome já foi cadastrado !</span> 
+                </div>
+                <div class="col-12  mb-3">
+                <label for="emailEditar" class="form-label">Email</label>
+                <input type="email"   class="form-control" id="emailEditar" value="" required >
+                <span class="text-danger d-none">Nome já foi cadastrado !</span>
+                </div>
+                
+                <div class="col-12  mb-3">
+                    <label for="profissaoEditar" class="form-label">Profissão</label> 
+                    <select class="form-select " aria-label="Default select example" id="profissaoEditar" required>
+                        <option selected> - Selecione - </option>
+                        <option value="Analistadebigdata">Analista de big data</option>
+                        <option value="Analistadetestesdesoftwares">Analista de testes de softwares</option>
+                        <option value="Arquiteturaderedes">Arquitetura de redes</option>
+                        <option value="Engenhariadehardware">Engenharia de hardware</option>
+                        <option value="Especialistadecibersegurança">Especialista de cibersegurança</option>
+                        <option value="Desenvolvimentodegames">Desenvolvimento de games</option>
+                        <option value="Programacaoweb">Programação web</option>
+                        <option value="Desenvolvedormobile">Desenvolvedor mobile</option>
+                    </select>
+                </div>
+                
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary mb-3" >Salvar</button>
+                </div>
+          </form>
+        </div> 
+      </div>
+    </div>
+  </div>
 
     <script src="assets/js/jquery-3.6.0.min.js" ></script>
     <script src="assets/js/bootstrap.min.js"></script>
