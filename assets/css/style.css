@@ -8,3 +8,7 @@
 .validarNome{
     display: none;
 }
+
+.cursor{
+    cursor: pointer;
+}

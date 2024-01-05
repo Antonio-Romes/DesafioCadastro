@@ -114,6 +114,10 @@ const excluir = (dadosDaLinnhaDaTabela) => {
     limparCorpoDaTabela();
     montarCorpoDaTabela();
 }
+
+const ordenaDadoNaColunaDaTabela = (dadosDaColunaDaTabela) => {
+    alert("Ola");
+}
 const abrirModal = () => $("#exampleModal").modal("show");
 const fechaModal = () => $("#exampleModal").modal("hide");
  
