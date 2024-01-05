@@ -1,6 +1,14 @@
 
-let listaCadastro = [{id: 0, nome:"ola",email:"ola@gmail.com",profissao:"Programação web"}];
-
+let listaCadastro = [
+    {id: 0, nome:"ola",email:"Maria@gmail.com",profissao:"Analista de testes de softwares"},
+    {id: 1, nome:"crescente",email:"João@gmail.com",profissao:"Especialista de cibersegurança"},
+    {id: 2, nome:"função",email:"Ana@gmail.com",profissao:"Programação web"},
+    {id: 3, nome:"comparação",email:"Pedro@gmail.com",profissao:"Desenvolvedor mobile"},
+    {id: 4, nome:"informações",email:"Carlaa@gmail.com",profissao:"Desenvolvimento de games"},
+    {id: 5, nome:"idade",email:"Antônioa@gmail.com",profissao:"Engenharia de hardware"},
+    {id: 6, nome:"array ",email:"Sofia@gmail.com",profissao:"Arquitetura de redes"},
+];
+let tipoDeOrdenacao = "ASC"
  
 $( document ).ready(function() {
     montarCorpoDaTabela();
@@ -115,9 +123,55 @@ const excluir = (dadosDaLinnhaDaTabela) => {
     montarCorpoDaTabela();
 }
 
-const ordenaDadoNaColunaDaTabela = (dadosDaColunaDaTabela) => {
-    alert("Ola");
-}
+
 const abrirModal = () => $("#exampleModal").modal("show");
 const fechaModal = () => $("#exampleModal").modal("hide");
  
+
+document.getElementById('tabelaDeDadosCadastrados').addEventListener('click', function(e) {
+    var cabecalhoDaTabelaClicado = e.target.tagName == 'TH' ? e.target : e.target.parentElement;
+    if (cabecalhoDaTabelaClicado.tagName == 'TH') {
+        ordenaDadoNaColunaDaTabela(cabecalhoDaTabelaClicado.textContent.toLowerCase().replace('ã','a').replace(/^\s+|\s+$/gm,''));
+    }
+
+    limparCorpoDaTabela();
+    montarCorpoDaTabela();
+});
+
+
+const ordenaDadoNaColunaDaTabela = (nomeDaColunaClicada) => {
+
+    if(tipoDeOrdenacao === "ASC"){
+        ordenacaoCrescente(nomeDaColunaClicada);
+        tipoDeOrdenacao = "DESC";
+    }
+    else{
+        ordenacaoDecrescente(nomeDaColunaClicada);
+        tipoDeOrdenacao = "ASC";
+    }
+   
+}
+
+const ordenacaoCrescente = (nomeDoCabecalho) => {
+    return listaCadastro.sort((a, b) => {
+        if (a[nomeDoCabecalho] < b[nomeDoCabecalho]) {
+            return -1;
+        }
+        if (a[nomeDoCabecalho] > b[nomeDoCabecalho]) {
+            return 1;
+        }
+        return 0;
+    });
+};
+
+const ordenacaoDecrescente = (nomeDoCabecalho) => {
+    return listaCadastro.sort((a, b) => {
+        if (a[nomeDoCabecalho] > b[nomeDoCabecalho]) {
+            return -1;
+        }
+        if (a[nomeDoCabecalho] < b[nomeDoCabecalho]) {
+            return 1;
+        }
+        return 0;
+    });
+};
