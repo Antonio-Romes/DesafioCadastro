@@ -27,8 +27,8 @@ let inicioDoIndex = 0;
 let finalDoIndex = 5;
  
 $( document ).ready(function() {
-    montarCorpoDaTabela();
-    montarLinkDePaginacao();
+    montarCorpoDaTabela(listaCadastro);
+    montarLinkDePaginacao(listaCadastro);
 });
 
 const form = document.getElementById('formCadastro')
@@ -43,7 +43,7 @@ form.addEventListener('submit', e => {
 
     adicionaCadastroNaLista(id,nome,email,profissao);
     limparCorpoDaTabela();
-    montarCorpoDaTabela();
+    montarCorpoDaTabela(listaCadastro);
    
 })
 
@@ -64,7 +64,7 @@ formEditar.addEventListener('submit', e => {
     })
  
     limparCorpoDaTabela();
-    montarCorpoDaTabela();
+    montarCorpoDaTabela(listaCadastro);
     fechaModal();
 })
  
@@ -78,19 +78,19 @@ const adicionaCadastroNaLista = (id,nome,email, profissao) => {
     
 }
 
- const montarCorpoDaTabela = () => {  
+ const montarCorpoDaTabela = (listaDeDados) => {  
       
       let htmlTabelaCorpo = "";
       for (index = inicioDoIndex; index < finalDoIndex; index++) {
-        if(listaCadastro[index] === undefined){
+        if(listaDeDados[index] === undefined){
             break;
         }
         else{
             htmlTabelaCorpo += `<tr> 
-            <td hidden>${listaCadastro[index].id}</td>
-            <td>${listaCadastro[index].nome}</td>
-            <td>${listaCadastro[index].email}</td>
-            <td>${listaCadastro[index].profissao}</td>
+            <td hidden>${listaDeDados[index].id}</td>
+            <td>${listaDeDados[index].nome}</td>
+            <td>${listaDeDados[index].email}</td>
+            <td>${listaDeDados[index].profissao}</td>
             <td> 
                 <button type="button" class="btn btn-primary" onclick="editarLinhaDaTabela(this)">Editar</button> 
                 <button type="button" class="btn btn-danger" onclick="excluir(this)">Excluir</button>
@@ -105,8 +105,8 @@ const adicionaCadastroNaLista = (id,nome,email, profissao) => {
     
  }
 
- const montarLinkDePaginacao = () => { 
-    let totalDePagina = retornarTotalDePagina();
+ const montarLinkDePaginacao = (listaDeDados) => { 
+    let totalDePagina = retornarTotalDePagina(listaDeDados);
     let oi = `
     <li class="page-item">
         <a class="page-link" href="#" aria-label="Anterior">
@@ -128,8 +128,8 @@ const adicionaCadastroNaLista = (id,nome,email, profissao) => {
 
  }
 
- const retornarTotalDePagina = () =>{
-    let totalDeDadosDaLista = listaCadastro.length; 
+ const retornarTotalDePagina = (listaDeDados) =>{
+    let totalDeDadosDaLista = listaDeDados.length; 
     let totalDeDadoExibidosPorPagina = retornaTotalDeDadoExibidoPorPagina();
 
     if((totalDeDadosDaLista % totalDeDadoExibidosPorPagina) == 0){
@@ -170,8 +170,8 @@ const adicionaCadastroNaLista = (id,nome,email, profissao) => {
     inicioDoIndex = finalDoIndex - totalDeDadoExibidoPorPagina 
 
     limparCorpoDaTabela();
-    montarCorpoDaTabela();
-    montarLinkDePaginacao();
+    montarCorpoDaTabela(listaCadastro);
+    montarLinkDePaginacao(listaCadastro);
  }
 
  const limparCorpoDaTabela = () => {
@@ -213,7 +213,7 @@ const excluir = (dadosDaLinnhaDaTabela) => {
     })
  
     limparCorpoDaTabela();
-    montarCorpoDaTabela();
+    montarCorpoDaTabela(listaCadastro);
 }
 
 
@@ -228,7 +228,7 @@ document.getElementById('tabelaDeDadosCadastrados').addEventListener('click', fu
     }
 
     limparCorpoDaTabela();
-    montarCorpoDaTabela();
+    montarCorpoDaTabela(listaCadastro);
 });
 
 
@@ -276,7 +276,44 @@ const alterarValorDaPaginacao = () => {
      inicioDoIndex = 0 ;
      finalDoIndex = totalDePagina != 1 ? totalDePagina : listaCadastro.length;
 
-     montarLinkDePaginacao();
+     montarLinkDePaginacao(listaCadastro);
 }
 
-        
+
+const filtraDadosDaTabela = () =>{
+
+    let textoDoFiltro = document.getElementById("inputFiltro").value;
+
+    let listaCadastroFiltrada = listaCadastro.filter(item => {
+        if(item.nome.includes(textoDoFiltro) || item.email.includes(textoDoFiltro) || item.profissao.includes(textoDoFiltro)){
+            return item;
+        }
+    })
+    
+    limparCorpoDaTabela();
+
+    if(listaCadastroFiltrada.length > 0)
+    {
+        let listaDeDados =  textoDoFiltro != "" ? listaCadastroFiltrada : listaCadastro ;
+        inicioDoIndex = 0;
+        finalDoIndex = retornaTotalDeDadoExibidoPorPagina(); 
+        montarCorpoDaTabela(listaDeDados);
+        montarLinkDePaginacao(listaDeDados);
+    }
+    else{
+        mostrarMsgNaoTemDadosNaTabela();
+    }
+   
+
+    
+}
+
+const mostrarMsgNaoTemDadosNaTabela = () => {
+ 
+    let htmlMensagem = `<tr id="msgNaoTemDados">
+                            <td colspan="4"><h5 class="text-center text-danger">Não tem dados</h5></td>
+                        </tr>`
+    
+    let corpoTabela = document.getElementById('corpoTabela');
+    corpoTabela.innerHTML += htmlMensagem;
+} 

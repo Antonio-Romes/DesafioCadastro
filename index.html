@@ -58,7 +58,7 @@
           </select>
         </div>
         <div class="col-6 d-flex justify-content-end"> 
-            <input class="form-control me-2 w-50" type="search" placeholder="Filtrar" value="">  
+            <input class="form-control me-2 w-50" type="search" placeholder="Filtrar" id="inputFiltro" value="" onkeyup="filtraDadosDaTabela()">  
         </div> 
       </div>
         <table class="table table-striped">
@@ -72,9 +72,7 @@
               </tr>
             </thead>
             <tbody class="table-group-divider" id="corpoTabela"> 
-               <tr>
-                    <td colspan="4"><h4 class="text-center text-danger">Não tem dados</h4></td>
-               </tr> 
+                 
             </tbody>
           </table>
           <nav aria-label="Navegação de página exemplo">
