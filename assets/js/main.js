@@ -142,11 +142,13 @@ const adicionaCadastroNaLista = (id,nome,email, profissao) => {
 
  const retornaTotalDeDadoExibidoPorPagina = () =>{
     let totalDePagina = document.getElementById('totalDePagina'); 
-    return totalDePagina != 0 ? totalDePagina.options[totalDePagina.selectedIndex].value : 0;
+    return totalDePagina != 1 ? totalDePagina.options[totalDePagina.selectedIndex].value : 1;
  }
 
  const montarLi = (totalDePagina) => {
+    let exibiTotalDePagina = retornaTotalDeDadoExibidoPorPagina();
 
+    totalDePagina = exibiTotalDePagina == 1 ? 1 : totalDePagina;
     let htmlLi = "";
     for(let index = 1; index <= totalDePagina; index++) {
         htmlLi += `<li class="page-item"><span class="page-link cursor" valorDaPaginacao="${index}" onclick="linkDeNavegacao(this)">${index}</span></li>`; 
@@ -272,7 +274,7 @@ const alterarValorDaPaginacao = () => {
     let totalDePagina = retornaTotalDeDadoExibidoPorPagina() 
 
      inicioDoIndex = 0 ;
-     finalDoIndex = totalDePagina != 0 ? totalDePagina : listaCadastro.length;
+     finalDoIndex = totalDePagina != 1 ? totalDePagina : listaCadastro.length;
 
      montarLinkDePaginacao();
 }
