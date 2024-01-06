@@ -1,3 +1,4 @@
+ 
 
 let listaCadastro = [
     {id: 0, nome:"ola",email:"Maria@gmail.com",profissao:"Analista de testes de softwares"},
@@ -120,7 +121,7 @@ const adicionaCadastroNaLista = (id,nome,email, profissao) => {
         </a>
     </li>
     <li class="page-item row flex-row align-items-center">
-        <p class="ps-4 m-0">Total de páginas: ${retornaTotalDeDadosDaLista()}</p>
+        <p class="ps-4 m-0">Total de dados - ${retornaTotalDeDadosDaLista()}</p>
     </li>
   `
   let ulDaPaginacao = document.querySelector(".pagination");
@@ -302,10 +303,7 @@ const filtraDadosDaTabela = () =>{
     }
     else{
         mostrarMsgNaoTemDadosNaTabela();
-    }
-   
-
-    
+    } 
 }
 
 const mostrarMsgNaoTemDadosNaTabela = () => {
@@ -317,3 +315,24 @@ const mostrarMsgNaoTemDadosNaTabela = () => {
     let corpoTabela = document.getElementById('corpoTabela');
     corpoTabela.innerHTML += htmlMensagem;
 } 
+
+ 
+
+const gerarPDF = () => { 
+    const element = document.getElementById('tabelaListaDeCadastro'); 
+     var opt = {
+        margin:       [0,0.2,0.5,0.2],
+        filename:     'myfile.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+        pagebreak: { mode: 'avoid-all', before: '#page2el' }
+      };
+       
+      html2pdf().set(opt).from(element).save();
+       
+      html2pdf(element, opt);
+    
+}
+
+ 
