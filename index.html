@@ -46,7 +46,22 @@
       </form>
     </section>
     <section id="tabelaDeDadosCadastrados" class="sectionTable container mt-4">
-        <table class="table table-striped ">
+      <div class="row">
+        <div class="col-6">
+          <select class="form-select w-25" id="totalDePagina" onchange="alterarValorDaPaginacao()" > 
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="0">tudo</option>
+          </select>
+        </div>
+        <div class="col-6 d-flex justify-content-end"> 
+            <input class="form-control me-2 w-50" type="search" placeholder="Filtrar" value="">  
+        </div> 
+      </div>
+        <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col" hidden >Id</th>
@@ -62,6 +77,11 @@
                </tr> 
             </tbody>
           </table>
+          <nav aria-label="Navegação de página exemplo">
+            <ul class="pagination">
+             
+            </ul>
+          </nav>
     </section>
 
     <!-- Modal -->

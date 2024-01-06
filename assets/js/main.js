@@ -6,12 +6,29 @@ let listaCadastro = [
     {id: 3, nome:"comparação",email:"Pedro@gmail.com",profissao:"Desenvolvedor mobile"},
     {id: 4, nome:"informações",email:"Carlaa@gmail.com",profissao:"Desenvolvimento de games"},
     {id: 5, nome:"idade",email:"Antônioa@gmail.com",profissao:"Engenharia de hardware"},
-    {id: 6, nome:"array ",email:"Sofia@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 6, nome:"Helena",email:"Helena@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 7, nome:"Maria Luísa",email:"MariaLuisa@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 8, nome:"Antonella",email:"Antonella@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 9, nome:"Aurora",email:"Auroraa@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 10, nome:"Francisco",email:"Sofia@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 11, nome:"Nicolas",email:"Nicolas@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 12, nome:"Rodrigo",email:"Sofia@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 13, nome:"Elisa",email:"Elisa@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 14, nome:"Valentina",email:"Valentina@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 15, nome:"Gabriela",email:"Gabriela@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 16, nome:"Henrique",email:"Henrique@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 17, nome:"Leonardo",email:"Leonardo@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 18, nome:"Luis",email:"Luis@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 19, nome:"Isabelly",email:"Isabelly@gmail.com",profissao:"Arquitetura de redes"},
+    {id: 20, nome:"Pablo",email:"Pablo@gmail.com",profissao:"Arquitetura de redes"},
 ];
 let tipoDeOrdenacao = "ASC"
+let inicioDoIndex = 0;
+let finalDoIndex = 5;
  
 $( document ).ready(function() {
     montarCorpoDaTabela();
+    montarLinkDePaginacao();
 });
 
 const form = document.getElementById('formCadastro')
@@ -54,31 +71,105 @@ formEditar.addEventListener('submit', e => {
 
 const adicionaCadastroNaLista = (id,nome,email, profissao) => { 
 
-    listaCadastro.push({id:id ,
+    listaCadastro.unshift({id:id ,
         nome:nome,
     email:email,
     profissao:profissao});
     
 }
 
- const montarCorpoDaTabela = () => { 
-    let htmlTabelaCorpo = listaCadastro.map((item) => {
-
-        return `<tr> 
-                    <td hidden>${item.id}</td>
-                    <td>${item.nome}</td>
-                    <td>${item.email}</td>
-                    <td>${item.profissao}</td>
-                    <td> 
-                        <button type="button" class="btn btn-primary" onclick="editarLinhaDaTabela(this)">Editar</button> 
-                        <button type="button" class="btn btn-danger" onclick="excluir(this)">Excluir</button>
-                    </td>
-                </tr>`
-      }).toString();
+ const montarCorpoDaTabela = () => {  
+      
+      let htmlTabelaCorpo = "";
+      for (index = inicioDoIndex; index < finalDoIndex; index++) {
+        if(listaCadastro[index] === undefined){
+            break;
+        }
+        else{
+            htmlTabelaCorpo += `<tr> 
+            <td hidden>${listaCadastro[index].id}</td>
+            <td>${listaCadastro[index].nome}</td>
+            <td>${listaCadastro[index].email}</td>
+            <td>${listaCadastro[index].profissao}</td>
+            <td> 
+                <button type="button" class="btn btn-primary" onclick="editarLinhaDaTabela(this)">Editar</button> 
+                <button type="button" class="btn btn-danger" onclick="excluir(this)">Excluir</button>
+            </td>
+        </tr>`
+        }
+       
+      }
 
       let corpoTabela = document.getElementById('corpoTabela');
       corpoTabela.innerHTML += htmlTabelaCorpo;
     
+ }
+
+ const montarLinkDePaginacao = () => { 
+    let totalDePagina = retornarTotalDePagina();
+    let oi = `
+    <li class="page-item">
+        <a class="page-link" href="#" aria-label="Anterior">
+        <span aria-hidden="true">&laquo;</span> 
+        </a>
+    </li>
+    ${montarLi(totalDePagina)}
+    <li class="page-item">
+        <a class="page-link" href="#" aria-label="Próximo">
+        <span aria-hidden="true">&raquo;</span> 
+        </a>
+    </li>
+    <li class="page-item row flex-row align-items-center">
+        <p class="ps-4 m-0">Total de páginas: ${retornaTotalDeDadosDaLista()}</p>
+    </li>
+  `
+  let ulDaPaginacao = document.querySelector(".pagination");
+  ulDaPaginacao.innerHTML = oi;
+
+ }
+
+ const retornarTotalDePagina = () =>{
+    let totalDeDadosDaLista = listaCadastro.length; 
+    let totalDeDadoExibidosPorPagina = retornaTotalDeDadoExibidoPorPagina();
+
+    if((totalDeDadosDaLista % totalDeDadoExibidosPorPagina) == 0){
+        return totalDeDadosDaLista/totalDeDadoExibidosPorPagina;
+    }
+    else{
+        return Math.trunc(totalDeDadosDaLista/totalDeDadoExibidosPorPagina) + 1;
+    }
+ }
+
+ const retornaTotalDeDadoExibidoPorPagina = () =>{
+    let totalDePagina = document.getElementById('totalDePagina'); 
+    return totalDePagina != 0 ? totalDePagina.options[totalDePagina.selectedIndex].value : 0;
+ }
+
+ const montarLi = (totalDePagina) => {
+
+    let htmlLi = "";
+    for(let index = 1; index <= totalDePagina; index++) {
+        htmlLi += `<li class="page-item"><span class="page-link cursor" valorDaPaginacao="${index}" onclick="linkDeNavegacao(this)">${index}</span></li>`; 
+    }
+
+    return htmlLi;
+ }
+
+ const retornaTotalDeDadosDaLista = () => {
+    return listaCadastro.length;
+ }
+
+ const linkDeNavegacao = (elemento) => {
+
+    let numeroDaPagina = elemento.attributes.valorDaPaginacao.value; 
+    let totalDeDadoExibidoPorPagina = retornaTotalDeDadoExibidoPorPagina();
+
+    finalDoIndex = numeroDaPagina * totalDeDadoExibidoPorPagina;
+    inicioDoIndex = finalDoIndex - totalDeDadoExibidoPorPagina 
+
+    limparCorpoDaTabela();
+    montarCorpoDaTabela();
+    montarLinkDePaginacao();
  }
 
  const limparCorpoDaTabela = () => {
@@ -175,3 +266,15 @@ const ordenacaoDecrescente = (nomeDoCabecalho) => {
         return 0;
     });
 };
+
+const alterarValorDaPaginacao = () => {
+     
+    let totalDePagina = retornaTotalDeDadoExibidoPorPagina() 
+
+     inicioDoIndex = 0 ;
+     finalDoIndex = totalDePagina != 0 ? totalDePagina : listaCadastro.length;
+
+     montarLinkDePaginacao();
+}
+
+        
