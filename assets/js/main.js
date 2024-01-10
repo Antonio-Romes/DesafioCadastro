@@ -41,13 +41,21 @@ form.addEventListener('submit', e => {
     let selectProfissao = document.getElementById("profissao");
     let profissao = selectProfissao.options[selectProfissao.selectedIndex].text;
 
+    esconderMensagemDeAlerta();
+    let spanValidarNome = document.getElementById('validarNome');
+    let spanValidarEmail = document.getElementById('validarEmail');
+    let nomeFoiSalvo = verificarSeNomeFoiSalvo(nome, spanValidarNome)
+    let emailFoiSalvo = verificarSeNomeFoiEmail(email, spanValidarEmail);
 
-    adicionaCadastroNaLista(id,nome,email,profissao);
-    limparCorpoDaTabela();
-    montarCorpoDaTabela(listaCadastro);
-   
+    if(!nomeFoiSalvo && !emailFoiSalvo ){ 
+        adicionaCadastroNaLista(id,nome,email,profissao);
+        limparCorpoDaTabela();
+        montarCorpoDaTabela(listaCadastro);
+        montarLinkDePaginacao(listaCadastro);
+    } 
 })
 
+const formEditar = document.getElementById('formEditar')
 formEditar.addEventListener('submit', e => {
     e.preventDefault();
     let id = document.getElementById("idEditar").value;
@@ -56,18 +64,56 @@ formEditar.addEventListener('submit', e => {
     let selectProfissao = document.getElementById("profissaoEditar");
     let profissao = selectProfissao.options[selectProfissao.selectedIndex].text;
 
-    listaCadastro.forEach(item => {
-        if (item.id == id) {
-            item.nome = nome;
-            item.email = email;
-            item.profissao = profissao;
-        }
-    })
- 
-    limparCorpoDaTabela();
-    montarCorpoDaTabela(listaCadastro);
-    fechaModal();
+    
+    esconderMensagemDeAlerta();
+    let spanValidarNome = document.getElementById('formEditarValidarNome');
+    let spanValidarEmail = document.getElementById('formEditarValidarEmail');
+    let nomeFoiSalvo = verificarSeNomeFoiSalvo(nome, spanValidarNome)
+    let emailFoiSalvo = verificarSeNomeFoiEmail(email, spanValidarEmail);
+
+    if(!nomeFoiSalvo && !emailFoiSalvo ){  
+        listaCadastro.forEach(item => {
+            if (item.id == id) {
+                item.nome = nome;
+                item.email = email;
+                item.profissao = profissao;
+            }
+        })
+        limparCorpoDaTabela();
+        montarCorpoDaTabela(listaCadastro); 
+        fechaModal();
+    } 
+   
 })
+
+const verificarSeNomeFoiSalvo = (nome, elemento) =>{
+    let nomeFoiSalvo = listaCadastro.find((item) => item.nome === nome);
+
+    if(!!nomeFoiSalvo){ 
+        mostrarMensagemDeAlerta(elemento);
+    }
+    return !!nomeFoiSalvo;
+}
+
+const verificarSeNomeFoiEmail = (email, elemento) =>{
+    let emailFoiSalvo = listaCadastro.find((item) => item.email === email);
+    if(!!emailFoiSalvo){ 
+        mostrarMensagemDeAlerta(elemento);
+    }
+    return !!emailFoiSalvo;
+}
+ 
+
+const mostrarMensagemDeAlerta = (elemento) => {
+    elemento.classList.remove("d-none");
+}
+
+const esconderMensagemDeAlerta = () => { 
+    document.getElementById('validarNome').classList.add('d-none'); 
+    document.getElementById('validarEmail').classList.add('d-none'); 
+    document.getElementById('formEditarValidarNome').classList.add('d-none');  
+    document.getElementById('formEditarValidarEmail').classList.add('d-none'); 
+}
  
 
 const adicionaCadastroNaLista = (id,nome,email, profissao) => { 
@@ -335,10 +381,12 @@ const gerarPDF = () => {
     
 }
 
-function gerarExcel(type, fn, dl) {
+const gerarExcel = (type, fn, dl) => {
     var elt = document.getElementById('tabelaListaDeCadastro');
     var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
     return dl ?
         XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
         XLSX.writeFile(wb, fn || ('excel.' + (type || 'xlsx')));
 }
+
+
