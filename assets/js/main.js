@@ -30,11 +30,13 @@ let finalDoIndex = 5;
 $( document ).ready(function() {
     montarCorpoDaTabela(listaCadastro);
     montarLinkDePaginacao(listaCadastro);
+    document.getElementById("nome").focus();
 });
 
 const form = document.getElementById('formCadastro')
 form.addEventListener('submit', e => {
     e.preventDefault();
+    
     let id = listaCadastro.length;
     let nome = document.getElementById("nome").value;
     let email = document.getElementById("email").value;
@@ -50,6 +52,8 @@ form.addEventListener('submit', e => {
     if(!nomeFoiSalvo && !emailFoiSalvo ){ 
         adicionaCadastroNaLista(id,nome,email,profissao);
         limparCorpoDaTabela();
+        limparValoresDosInputs();
+        document.getElementById("nome").focus();
         montarCorpoDaTabela(listaCadastro);
         montarLinkDePaginacao(listaCadastro);
     } 
@@ -80,11 +84,25 @@ formEditar.addEventListener('submit', e => {
             }
         })
         limparCorpoDaTabela();
+        limparValoresDosInputs();
+        document.getElementById("nome").focus();
         montarCorpoDaTabela(listaCadastro); 
         fechaModal();
     } 
    
 })
+
+const limparValoresDosInputs = () => { 
+    let selectProfissao  = '';
+    document.getElementById("nome").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("profissao").value = "0" 
+     
+
+    document.getElementById("nomeEditar").value;
+    document.getElementById("emailEditar").value;
+    document.getElementById("profissaoEditar").value = "0" 
+}
 
 const verificarSeNomeFoiSalvo = (nome, elemento) =>{
     let nomeFoiSalvo = listaCadastro.find((item) => item.nome === nome);
@@ -227,7 +245,7 @@ const adicionaCadastroNaLista = (id,nome,email, profissao) => {
 
 
  const  editarLinhaDaTabela = (dadosDaLinnhaDaTabela) => {
-
+    
     let linha = dadosDaLinnhaDaTabela.parentNode.parentNode;
     let id = linha.cells[0].innerHTML;
     let nome = linha.cells[1].innerHTML;
@@ -260,7 +278,8 @@ const excluir = (dadosDaLinnhaDaTabela) => {
     })
  
     limparCorpoDaTabela();
-    montarCorpoDaTabela(listaCadastro);
+    montarCorpoDaTabela(listaCadastro); 
+    montarLinkDePaginacao(listaCadastro);
 }
 
 
