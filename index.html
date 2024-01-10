@@ -12,7 +12,7 @@
 <body>
     
     <section class="sectionCadastro d-flex flex-column justify-content-center ">
-        <h1 class="text-center my-4  ">Cadastro</h1>
+        <h1 class="text-center my-4 ">Cadastro</h1>
         <form id="formCadastro" class="row w-50 border border-light-subtle p-3 rounded mx-auto"  >
             <div class="col-12  mb-3">
                 <label for="nome" class="form-label">Nome</label>
@@ -41,12 +41,17 @@
             </div>
             
             <div class="col-12 d-flex justify-content-end">
-                <button type="submit" class="btn btn-success mb-3" >Salvar</button>
+               <button type="submit" class="btn mb-3" > <svg xmlns="http://www.w3.org/2000/svg" class="text-success" width="38" height="38" viewBox="0 0 512 512">
+                <path fill="currentColor" d="M64 48c-8.726 0-16 7.274-16 16v384c0 8.726 7.274 16 16 16h215v-16H64V64h63.375v97.53c0 3.924 3.443 7.095 7.72 7.095h169.81c4.277 0 7.72-3.17 7.72-7.094V64h69.22c.428.318.8.548 1.467 1.094c2.05 1.675 4.962 4.264 8.375 7.406c6.827 6.283 15.65 14.837 24.313 23.5c8.663 8.663 17.217 17.486 23.5 24.313c3.142 3.413 5.73 6.324 7.406 8.374c.546.668.776 1.04 1.094 1.47V330.25l16 16V128c0-2.68-.657-3.402-1.03-4.156a15.312 15.312 0 0 0-1.095-1.844c-.74-1.1-1.575-2.19-2.594-3.438c-2.036-2.492-4.768-5.55-8.03-9.093c-6.524-7.09-15.155-16-23.938-24.782c-8.782-8.783-17.692-17.414-24.78-23.938c-3.545-3.262-6.6-5.994-9.094-8.03c-1.247-1.02-2.337-1.855-3.438-2.595c-.55-.37-1.09-.72-1.844-1.094c-.754-.373-1.477-1.03-4.156-1.03zm87.72 16h48.56c4.277 0 7.72 4.425 7.72 9.938v70.124c0 5.513-3.443 9.938-7.72 9.938h-48.56c-4.277 0-7.72-4.425-7.72-9.938V73.938c0-5.512 3.443-9.937 7.72-9.937zM114 212c-4.432 0-8 3.568-8 8v184c0 4.432 3.568 8 8 8h165v-28h-76.72l15.345-15.375l128-128L352 234.28l6.375 6.345L406 288.25V220c0-4.432-3.568-8-8-8zm238 47.75L245.75 366H297v128h110V366h51.25zM448 384v64h-23v16h23c8.726 0 16-7.274 16-16v-64z"/></svg>
+              </button>
             </div>
       </form>
     </section>
-    <section id="tabelaDeDadosCadastrados" class="sectionTable container mt-4">
-      <div class="row">
+
+    <hr class="container border border-2 border-dark">
+
+    <section id="tabelaDeDadosCadastrados" class="sectionTable container my-4">
+      <div class="row mb-4">
         <div class="col-6 d-flex">
           <select class="form-select w-25" id="totalDePagina" onchange="alterarValorDaPaginacao()" > 
             <option value="5" selected>5</option>
@@ -66,12 +71,17 @@
         </div> 
       </div>
         <table id="tabelaListaDeCadastro" class="table table-striped">
-            <thead>
+            <thead class="bg-dark">
               <tr>
                 <th scope="col" hidden >Id</th>
-                <th class="cursor" scope="col">Nome &nbsp;&nbsp;<img src="assets/img/ordenacao.png" alt="icon de ordenação" srcset=""></th>
-                <th class="cursor" scope="col">Email  &nbsp;&nbsp;<img  src="assets/img/ordenacao.png" alt="icon de ordenação" srcset=""></th>
-                <th class="cursor" scope="col">Profissão &nbsp;&nbsp;<img  src="assets/img/ordenacao.png" alt="icon de ordenação" srcset=""></th>
+                <th class="cursor text-white" scope="col">Nome &nbsp;&nbsp;
+                  <svg xmlns="http://www.w3.org/2000/svg" class="text-white" width="20" height="20" viewBox="0 0 1024 1408"><path fill="currentColor" d="M1024 896q0 26-19 45l-448 448q-19 19-45 19t-45-19L19 941Q0 922 0 896t19-45t45-19h896q26 0 45 19t19 45m0-384q0 26-19 45t-45 19H64q-26 0-45-19T0 512t19-45L467 19q19-19 45-19t45 19l448 448q19 19 19 45"/></svg>
+                <th class="cursor text-white" scope="col">Email  &nbsp;&nbsp;
+                  <svg xmlns="http://www.w3.org/2000/svg" class="text-white" width="20" height="20" viewBox="0 0 1024 1408"><path fill="currentColor" d="M1024 896q0 26-19 45l-448 448q-19 19-45 19t-45-19L19 941Q0 922 0 896t19-45t45-19h896q26 0 45 19t19 45m0-384q0 26-19 45t-45 19H64q-26 0-45-19T0 512t19-45L467 19q19-19 45-19t45 19l448 448q19 19 19 45"/></svg>
+                </th>
+                <th class="cursor text-white" scope="col">Profissão &nbsp;&nbsp;
+                  <svg xmlns="http://www.w3.org/2000/svg" class="text-white" width="20" height="20" viewBox="0 0 1024 1408"><path fill="currentColor" d="M1024 896q0 26-19 45l-448 448q-19 19-45 19t-45-19L19 941Q0 922 0 896t19-45t45-19h896q26 0 45 19t19 45m0-384q0 26-19 45t-45 19H64q-26 0-45-19T0 512t19-45L467 19q19-19 45-19t45 19l448 448q19 19 19 45"/></svg>
+                </th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -91,7 +101,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-4 " id="exampleModalLabel">Editar Cadastro</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -127,7 +137,9 @@
                 </div>
                 
                 <div class="col-12 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-success mb-3" >Salvar</button>
+                  <button type="submit" class="btn mb-3" > <svg xmlns="http://www.w3.org/2000/svg" class="text-success" width="38" height="38" viewBox="0 0 512 512">
+                    <path fill="currentColor" d="M64 48c-8.726 0-16 7.274-16 16v384c0 8.726 7.274 16 16 16h215v-16H64V64h63.375v97.53c0 3.924 3.443 7.095 7.72 7.095h169.81c4.277 0 7.72-3.17 7.72-7.094V64h69.22c.428.318.8.548 1.467 1.094c2.05 1.675 4.962 4.264 8.375 7.406c6.827 6.283 15.65 14.837 24.313 23.5c8.663 8.663 17.217 17.486 23.5 24.313c3.142 3.413 5.73 6.324 7.406 8.374c.546.668.776 1.04 1.094 1.47V330.25l16 16V128c0-2.68-.657-3.402-1.03-4.156a15.312 15.312 0 0 0-1.095-1.844c-.74-1.1-1.575-2.19-2.594-3.438c-2.036-2.492-4.768-5.55-8.03-9.093c-6.524-7.09-15.155-16-23.938-24.782c-8.782-8.783-17.692-17.414-24.78-23.938c-3.545-3.262-6.6-5.994-9.094-8.03c-1.247-1.02-2.337-1.855-3.438-2.595c-.55-.37-1.09-.72-1.844-1.094c-.754-.373-1.477-1.03-4.156-1.03zm87.72 16h48.56c4.277 0 7.72 4.425 7.72 9.938v70.124c0 5.513-3.443 9.938-7.72 9.938h-48.56c-4.277 0-7.72-4.425-7.72-9.938V73.938c0-5.512 3.443-9.937 7.72-9.937zM114 212c-4.432 0-8 3.568-8 8v184c0 4.432 3.568 8 8 8h165v-28h-76.72l15.345-15.375l128-128L352 234.28l6.375 6.345L406 288.25V220c0-4.432-3.568-8-8-8zm238 47.75L245.75 366H297v128h110V366h51.25zM448 384v64h-23v16h23c8.726 0 16-7.274 16-16v-64z"/></svg>
+                  </button>
                 </div>
           </form>
         </div> 

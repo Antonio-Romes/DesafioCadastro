@@ -157,8 +157,10 @@ const adicionaCadastroNaLista = (id,nome,email, profissao) => {
             <td>${listaDeDados[index].email}</td>
             <td>${listaDeDados[index].profissao}</td>
             <td> 
-                <button type="button" class="btn btn-primary" onclick="editarLinhaDaTabela(this)">Editar</button> 
-                <button type="button" class="btn btn-danger" onclick="excluir(this)">Excluir</button>
+                <button type="button" class="btn" onclick="editarLinhaDaTabela(this)">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="text-primary" width="38" height="38" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M20 12V5.749a.6.6 0 0 0-.176-.425l-3.148-3.148A.6.6 0 0 0 16.252 2H4.6a.6.6 0 0 0-.6.6v18.8a.6.6 0 0 0 .6.6H11M8 10h8M8 6h4m-4 8h3m6.954 2.94l1-1a1.121 1.121 0 0 1 1.586 0v0a1.121 1.121 0 0 1 0 1.585l-1 1m-1.586-1.586l-2.991 2.991a1 1 0 0 0-.28.553l-.244 1.557l1.557-.243a1 1 0 0 0 .553-.28l2.99-2.992m-1.585-1.586l1.586 1.586"/><path d="M16 2v3.4a.6.6 0 0 0 .6.6H20"/></g></svg></button> 
+                <button type="button" class="btn" onclick="excluir(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-danger" width="38" height="38" viewBox="0 0 16 16"><path fill="currentColor" d="M9 3a1 1 0 0 0-2 0zM6 3a2 2 0 1 1 4 0h4a.5.5 0 0 1 0 1h-.564l-.233 1.71A5.5 5.5 0 0 0 7.337 15H6.246a2.5 2.5 0 0 1-2.477-2.162L2.564 4H2a.5.5 0 0 1 0-1zm4.5 12a4.5 4.5 0 1 0 0-9a4.5 4.5 0 0 0 0 9m-.896-6.396l-.897.896h1.543A2.75 2.75 0 0 1 13 12.25v.25a.5.5 0 0 1-1 0v-.25a1.75 1.75 0 0 0-1.75-1.75H8.707l.897.896a.5.5 0 0 1-.708.708L7.144 10.35a.498.498 0 0 1 .002-.705l1.75-1.75a.5.5 0 1 1 .708.708"/></svg></button>
             </td>
         </tr>`
         }
@@ -185,7 +187,7 @@ const adicionaCadastroNaLista = (id,nome,email, profissao) => {
         </a>
     </li>
     <li class="page-item row flex-row align-items-center">
-        <p class="ps-4 m-0">Total de dados - ${retornaTotalDeDadosDaLista()}</p>
+        <p class="ps-4 m-0">Total de dados - ${retornaTotalDeDadosDaLista(listaDeDados)}</p>
     </li>
   `
   let ulDaPaginacao = document.querySelector(".pagination");
@@ -222,8 +224,8 @@ const adicionaCadastroNaLista = (id,nome,email, profissao) => {
     return htmlLi;
  }
 
- const retornaTotalDeDadosDaLista = () => {
-    return listaCadastro.length;
+ const retornaTotalDeDadosDaLista = (listaDeDados) => {
+    return listaDeDados.length;
  }
 
  const linkDeNavegacao = (elemento) => {
@@ -368,6 +370,7 @@ const filtraDadosDaTabela = () =>{
     }
     else{
         mostrarMsgNaoTemDadosNaTabela();
+        montarLinkDePaginacao(listaCadastroFiltrada);
     } 
 }
 
