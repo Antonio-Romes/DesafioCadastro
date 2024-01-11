@@ -174,24 +174,30 @@ const adicionaCadastroNaLista = (id,nome,email, profissao) => {
 
  const montarLinkDePaginacao = (listaDeDados) => { 
     let totalDePagina = retornarTotalDePagina(listaDeDados);
-    let oi = `
-    <li class="page-item">
-        <a class="page-link" href="#" aria-label="Anterior">
-        <span aria-hidden="true">&laquo;</span> 
-        </a>
-    </li>
-    ${montarLi(totalDePagina)}
-    <li class="page-item">
-        <a class="page-link" href="#" aria-label="Próximo">
-        <span aria-hidden="true">&raquo;</span> 
-        </a>
-    </li>
-    <li class="page-item row flex-row align-items-center">
+    let htmlLi = "";
+
+    if(totalDePagina > 0){
+        htmlLi += `
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Anterior">
+            <span aria-hidden="true">&laquo;</span> 
+            </a>
+        </li>
+        ${montarLi(totalDePagina)}
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Próximo">
+            <span aria-hidden="true">&raquo;</span> 
+            </a>
+        </li> 
+      `
+    }
+   
+  htmlLi += `
+     <li class="page-item row flex-row align-items-center">
         <p class="ps-4 m-0">Total de dados - ${retornaTotalDeDadosDaLista(listaDeDados)}</p>
-    </li>
-  `
+    </li>`;
   let ulDaPaginacao = document.querySelector(".pagination");
-  ulDaPaginacao.innerHTML = oi;
+  ulDaPaginacao.innerHTML = htmlLi;
 
  }
 
@@ -295,8 +301,16 @@ document.getElementById('tabelaDeDadosCadastrados').addEventListener('click', fu
         ordenaDadoNaColunaDaTabela(cabecalhoDaTabelaClicado.textContent.toLowerCase().replace('ã','a').replace(/^\s+|\s+$/gm,''));
     }
 
-    limparCorpoDaTabela();
-    montarCorpoDaTabela(listaCadastro);
+    let valorDoInputFiltro = document.getElementById('inputFiltro').value;
+
+     if(valorDoInputFiltro != ""){
+        filtraDadosDaTabela();
+     }
+     else{
+        limparCorpoDaTabela();
+        montarCorpoDaTabela(listaCadastro);
+     }
+    
 });
 
 
@@ -344,7 +358,16 @@ const alterarValorDaPaginacao = () => {
      inicioDoIndex = 0 ;
      finalDoIndex = totalDePagina != 1 ? totalDePagina : listaCadastro.length;
 
-     montarLinkDePaginacao(listaCadastro);
+     let valorDoInputFiltro = document.getElementById('inputFiltro').value;
+
+     if(valorDoInputFiltro != ""){
+        filtraDadosDaTabela();
+     }
+     else{
+        montarLinkDePaginacao(listaCadastro);
+     }
+
+    
 }
 
 
