@@ -1,12 +1,12 @@
  
 
 let listaCadastro = [
-    {id: 0, nome:"ola",email:"Maria@gmail.com",profissao:"Analista de testes de softwares"},
-    {id: 1, nome:"crescente",email:"João@gmail.com",profissao:"Especialista de cibersegurança"},
-    {id: 2, nome:"função",email:"Ana@gmail.com",profissao:"Programação web"},
-    {id: 3, nome:"comparação",email:"Pedro@gmail.com",profissao:"Desenvolvedor mobile"},
-    {id: 4, nome:"informações",email:"Carlaa@gmail.com",profissao:"Desenvolvimento de games"},
-    {id: 5, nome:"idade",email:"Antônioa@gmail.com",profissao:"Engenharia de hardware"},
+    {id: 0, nome:"Maria",email:"Maria@gmail.com",profissao:"Analista de testes de softwares"},
+    {id: 1, nome:"João",email:"João@gmail.com",profissao:"Especialista de cibersegurança"},
+    {id: 2, nome:"Ana",email:"Ana@gmail.com",profissao:"Programação web"},
+    {id: 3, nome:"Pedro",email:"Pedro@gmail.com",profissao:"Desenvolvedor mobile"},
+    {id: 4, nome:"Carla",email:"Carlaa@gmail.com",profissao:"Desenvolvimento de games"},
+    {id: 5, nome:"Antônio",email:"Antônioa@gmail.com",profissao:"Engenharia de hardware"},
     {id: 6, nome:"Helena",email:"Helena@gmail.com",profissao:"Arquitetura de redes"},
     {id: 7, nome:"Maria Luísa",email:"MariaLuisa@gmail.com",profissao:"Arquitetura de redes"},
     {id: 8, nome:"Antonella",email:"Antonella@gmail.com",profissao:"Arquitetura de redes"},
