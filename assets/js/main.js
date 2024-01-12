@@ -75,20 +75,20 @@ formEditar.addEventListener('submit', e => {
     let nomeFoiSalvo = verificarSeNomeFoiSalvo(nome, spanValidarNome)
     let emailFoiSalvo = verificarSeNomeFoiEmail(email, spanValidarEmail);
 
-    if(!nomeFoiSalvo && !emailFoiSalvo ){  
-        listaCadastro.forEach(item => {
-            if (item.id == id) {
-                item.nome = nome;
-                item.email = email;
-                item.profissao = profissao;
-            }
-        })
-        limparCorpoDaTabela();
-        limparValoresDosInputs();
-        document.getElementById("nome").focus();
-        montarCorpoDaTabela(listaCadastro); 
-        fechaModal();
-    } 
+    
+    listaCadastro.forEach(item => {
+        if (item.id == id) {
+            item.nome = nome;
+            item.email = email;
+            item.profissao = profissao;
+        }
+    })
+    limparCorpoDaTabela();
+    limparValoresDosInputs();
+    document.getElementById("nome").focus();
+    montarCorpoDaTabela(listaCadastro); 
+    fechaModal();
+    
    
 })
 
